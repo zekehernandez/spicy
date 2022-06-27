@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://player/platform.png" type="Texture" id=1]
-[ext_resource path="res://player/bar.png" type="Texture" id=2]
+[ext_resource path="res://player/Bird.tscn" type="PackedScene" id=2]
 [ext_resource path="res://player/Mover.gd" type="Script" id=3]
+[ext_resource path="res://player/bar.png" type="Texture" id=4]
 
 [sub_resource type="PhysicsMaterial" id=3]
 friction = 0.5
@@ -32,21 +33,6 @@ limit_left = -320
 limit_bottom = 640
 limit_smoothed = true
 
-[node name="JointA" type="GrooveJoint2D" parent="."]
-position = Vector2( -0.0624151, -96 )
-rotation = 0.532325
-node_a = NodePath("../Motor")
-node_b = NodePath("..")
-length = 192.0
-
-[node name="JointA2" type="GrooveJoint2D" parent="."]
-position = Vector2( -0.0624124, -96 )
-rotation = -0.532325
-scale = Vector2( 1, 1 )
-node_a = NodePath("../Motor")
-node_b = NodePath("..")
-length = 192.0
-
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2( 0.0727906, 79.8049 )
 rotation = 4.07453e-10
@@ -67,4 +53,17 @@ shape = SubResource( 2 )
 [node name="Sprite" type="Sprite" parent="Motor"]
 position = Vector2( 0.135216, 208 )
 scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 2 )
+texture = ExtResource( 4 )
+
+[node name="LeftBird" parent="Motor" instance=ExtResource( 2 )]
+position = Vector2( -63.8856, 176.042 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="RightBird" parent="Motor" instance=ExtResource( 2 )]
+position = Vector2( 64.1144, 175.958 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2( -0.0624156, -96 )
+node_a = NodePath("../Motor")
+node_b = NodePath("..")

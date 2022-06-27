@@ -16,7 +16,6 @@ var stopping_jump = false
 func _ready():
   pass # Replace with function body.
 
-
 func _integrate_forces(s):
   var lv = s.get_linear_velocity()
   var step = s.get_step()
@@ -34,4 +33,14 @@ func _integrate_forces(s):
   
   if up:
     $Motor.apply_central_impulse(Vector2(0, -15))
-  
+    
+    
+  if left or right or up:
+    $Motor/LeftBird.set_animation("fly")
+    $Motor/RightBird.set_animation("fly")
+  elif lv.y > 0.5:
+    $Motor/LeftBird.set_animation("glide")
+    $Motor/RightBird.set_animation("glide")
+  else:
+    $Motor/LeftBird.set_animation("idle")
+    $Motor/RightBird.set_animation("idle")
