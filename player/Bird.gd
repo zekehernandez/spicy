@@ -31,3 +31,6 @@ func fail():
 
 func success():
   $Face.set_animation("%s_happy" % prefix)
+  
+func express(expression):
+  $Face.set_animation("%s_%s" % [prefix, expression])

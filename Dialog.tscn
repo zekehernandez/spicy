@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Dialog.gd" type="Script" id=1]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 368.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel"]
+margin_left = 32.0
+margin_top = 40.0
+margin_right = 72.0
+margin_bottom = 54.0
+text = "test"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Panel"]
+visible = false
+margin_left = 624.0
+margin_top = 72.0
+margin_right = 786.0
+margin_bottom = 86.0
+text = "Press enter to continue..."
+__meta__ = {
+"_edit_use_anchors_": false
+}

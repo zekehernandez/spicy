@@ -24,7 +24,7 @@ func _ready():
   sauce.position = $SaucePosition.position
 
   results.setLevel(currentLevel)
-
+  mover.showCutscene(currentLevel)
 
 # Called every wframe. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -53,3 +53,7 @@ func _on_Sauce_body_entered(body):
   for cargo in get_tree().get_nodes_in_group("cargo"):
     if !cargo.isSpoiled:
       cargo.animatedSprite.play("spicy")
+
+func _on_Mover_cutsceneOver():
+  camera.current = true
+  mover.startPlaying()

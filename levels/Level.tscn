@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://player/Mover.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/TargetZone.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://levels/Level.gd" type="Script" id=5]
 [ext_resource path="res://levels/Results.tscn" type="PackedScene" id=6]
 [ext_resource path="res://objects/Sauce.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Camera.tscn" type="PackedScene" id=8]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 5 )
@@ -17,11 +18,8 @@ position = Vector2( 1344, 128 )
 [node name="Mover" parent="." instance=ExtResource( 1 )]
 position = Vector2( 192, 96 )
 
-[node name="Camera" type="Camera2D" parent="Mover"]
-current = true
-zoom = Vector2( 3, 3 )
-limit_left = 0
-limit_bottom = 0
+[node name="Camera" parent="Mover" instance=ExtResource( 8 )]
+max_zoom = 8
 
 [node name="Sauce" parent="." instance=ExtResource( 7 )]
 
@@ -37,5 +35,7 @@ autoplay = true
 visible = false
 
 [connection signal="body_entered" from="TargetZone" to="." method="_on_TargetZone_body_entered"]
+[connection signal="cutsceneOver" from="Mover" to="." method="_on_Mover_cutsceneOver"]
 [connection signal="landed" from="Mover" to="." method="_on_Mover_landed"]
+[connection signal="done_zooming" from="Mover/Camera" to="Mover" method="_on_Camera_done_zooming"]
 [connection signal="body_entered" from="Sauce" to="." method="_on_Sauce_body_entered"]

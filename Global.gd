@@ -29,7 +29,7 @@ func completeLevel(level, wings, spice):
   
 func enterCode(code):
   if levelState.has(code):
-    var newLevel = levelState.keys().find(code)
+    var newLevel = levelState.keys().find(code) + 1
     if newLevel > currentLevel:
       currentLevel = newLevel 
       return currentLevel

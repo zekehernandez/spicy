@@ -1,15 +1,23 @@
 extends RigidBody2D
 
 signal landed(wingCount)
+signal cutsceneOver
 
 const JUMP_VELOCITY = 50
 const STOP_JUMP_FORCE = 10
 const TORQUE = 200
 const LANDING_TIME = 3
 
+onready var camera = $CutsceneCamera
+onready var dialog = $CanvasLayer/Dialog
+onready var animator = $AnimationPlayer
+
+onready var leftBird = $Motor/LeftBird
+onready var rightBird = $Motor/RightBird
+
 var timeLanded = 0
 
-var state = "playing"
+var state = "initial"
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -20,6 +28,9 @@ var stopping_jump = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
   pass # Replace with function body.
+  
+func start():
+  state = "playing"
   
 func _process(delta):
   if state == "playing":
@@ -55,21 +66,87 @@ func _integrate_forces(s):
       $Motor.apply_central_impulse(Vector2(0, -15))
       
     if up:
-      $Motor/LeftBird.fly(lv.y > 100)
-      $Motor/RightBird.fly(lv.y > 100)
+      leftBird.fly(lv.y > 100)
+      rightBird.fly(lv.y > 100)
     elif lv.y > 0.5:
-      $Motor/LeftBird.glide()
-      $Motor/RightBird.glide()
+      leftBird.glide()
+      rightBird.glide()
     else:
-      $Motor/LeftBird.idle()
-      $Motor/RightBird.idle()
+      leftBird.idle()
+      rightBird.idle()
 
 func success():
-      $Motor/LeftBird.success()
-      $Motor/RightBird.success()  
+  leftBird.success()
+  rightBird.success()  
       
 func failed_level():
   state = "failed"
   mode = RigidBody2D.MODE_STATIC
-  $Motor/LeftBird.fail()
-  $Motor/RightBird.fail()
+  leftBird.fail()
+  rightBird.fail()
+
+func startPlaying():
+  state = "playing"
+  
+
+# Cutscene Stuff
+var currentCutscene = null
+var currentScene = null
+
+onready var cutscenes = {
+  0: [
+    { 'speaker': leftBird, 'expression': 'happy', 'message': null, 'animation': 'panIn'},
+    { 'speaker': rightBird, 'expression': 'happy', 'message': 'hello', 'animation': 'zoomTwo'},
+    { 'speaker': leftBird, 'expression': 'happy', 'message': 'hi there', 'animation': 'twoToOne'},
+   ],
+  1: null,
+}
+
+func playScene():
+  print('playing scene %s' % currentScene)
+  if currentCutscene == null:
+    return 
+  
+  if currentScene >= currentCutscene.size():
+    currentCutscene = null
+    currentScene = null
+    emit_signal("cutsceneOver")
+    return
+  
+  var scene = currentCutscene[currentScene]
+  currentScene += 1
+    
+  # Facial expression
+  print('face')
+  scene.speaker.express(scene.expression)
+  
+  # Pan Camera
+  if scene.animation != null:
+    print('animation')
+    animator.play(scene.animation)
+    yield(get_node('AnimationPlayer'), "animation_finished")
+  
+  if scene.message != null:
+    print('dialog')
+    dialog.show_message(scene.message)
+  else:
+    print('playScene calling playScene')
+    playScene()
+
+func showCutscene(level):
+  print('showCutscene(%s)' % level)
+  if !cutscenes.has(level):
+    return
+    
+  camera.current = true
+  
+  currentCutscene = cutscenes.get(level)
+  print('cutscene length: %s' % currentCutscene.size())
+  currentScene = 0
+  
+  print('showCutscene calling playScene')
+  playScene()
+
+func _on_Dialog_hide_message():
+  print('dialog calling playScene')
+  playScene()
