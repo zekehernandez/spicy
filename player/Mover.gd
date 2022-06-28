@@ -55,17 +55,21 @@ func _integrate_forces(s):
       $Motor.apply_central_impulse(Vector2(0, -15))
       
     if up:
-      $Motor/LeftBird.set_animation("fly")
-      $Motor/RightBird.set_animation("fly")
+      $Motor/LeftBird.fly(lv.y > 100)
+      $Motor/RightBird.fly(lv.y > 100)
     elif lv.y > 0.5:
-      $Motor/LeftBird.set_animation("glide")
-      $Motor/RightBird.set_animation("glide")
+      $Motor/LeftBird.glide()
+      $Motor/RightBird.glide()
     else:
-      $Motor/LeftBird.set_animation("idle")
-      $Motor/RightBird.set_animation("idle")
+      $Motor/LeftBird.idle()
+      $Motor/RightBird.idle()
+
+func success():
+      $Motor/LeftBird.success()
+      $Motor/RightBird.success()  
       
 func failed_level():
   state = "failed"
   mode = RigidBody2D.MODE_STATIC
-  $Motor/LeftBird.set_animation("glide")
-  $Motor/RightBird.set_animation("glide")
+  $Motor/LeftBird.fail()
+  $Motor/RightBird.fail()

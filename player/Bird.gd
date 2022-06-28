@@ -1,24 +1,33 @@
-extends RigidBody2D
-
-const JUMP_VELOCITY = 50
-const STOP_JUMP_FORCE = 10
-
-export var input_action = "left_action"
+extends AnimatedSprite
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var jumping = false
-var stopping_jump = false
+
+export var prefix = 'left'
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-  pass # Replace with function body.
+  $Face.play("%s_happy" % prefix)
 
+func fly(isStraining):
+  set_animation("fly")
+  if isStraining:
+    $Face.set_animation("%s_strain" % prefix)
+  else:
+    $Face.set_animation("%s_neutral" % prefix)
 
-func _physics_process(delta):
-  # Get player input.
-  var jump = Input.is_action_pressed(input_action)
+func glide():
+  set_animation("glide")
+  $Face.set_animation("%s_neutral" % prefix)
 
-  if jump:
-    apply_impulse(Vector2(0,0), Vector2(0, -5))
+func idle(): 
+  set_animation("idle")
+  $Face.set_animation("%s_neutral" % prefix)
+  
+func fail():
+  set_animation("glide")
+  $Face.set_animation("%s_surprised" % prefix)
+
+func success():
+  $Face.set_animation("%s_happy" % prefix)

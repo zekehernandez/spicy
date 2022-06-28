@@ -55,10 +55,11 @@ scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 4 )
 
 [node name="LeftBird" parent="Motor" instance=ExtResource( 2 )]
-position = Vector2( -63.9948, -31.9212 )
+position = Vector2( -64.0624, -39.9832 )
 
 [node name="RightBird" parent="Motor" instance=ExtResource( 2 )]
-position = Vector2( 64.0052, -32.0052 )
+position = Vector2( 63.9376, -40.0671 )
+prefix = "right"
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
 position = Vector2( -0.0624008, -191.938 )

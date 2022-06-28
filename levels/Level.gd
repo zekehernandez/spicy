@@ -44,6 +44,7 @@ func _process(delta):
 func _on_Mover_landed(wingCount):
   results.setWingCount(wingCount)
   results.show()
+  mover.success()
   Global.completeLevel(currentLevel, wingCount, didSauceUp)
 
 func _on_Sauce_body_entered(body):
