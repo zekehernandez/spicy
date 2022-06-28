@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://screens/LevelCard.gd" type="Script" id=1]
+
+[node name="LevelCard" type="Control" groups=["level_card"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_right = 160.0
+margin_bottom = 86.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSplitContainer" type="VSplitContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 153.0
+margin_bottom = 79.0
+dragger_visibility = 1
+
+[node name="VSplitContainer" type="VSplitContainer" parent="PanelContainer/VSplitContainer"]
+margin_right = 146.0
+margin_bottom = 40.0
+dragger_visibility = 1
+
+[node name="LevelLabel" type="Label" parent="PanelContainer/VSplitContainer/VSplitContainer"]
+margin_right = 146.0
+margin_bottom = 14.0
+text = "Level 1"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/VSplitContainer/VSplitContainer"]
+margin_top = 26.0
+margin_right = 146.0
+margin_bottom = 40.0
+dragger_visibility = 1
+
+[node name="WingsLabel" type="Label" parent="PanelContainer/VSplitContainer/VSplitContainer/HSplitContainer"]
+margin_right = 43.0
+margin_bottom = 14.0
+text = "Wings:"
+align = 1
+
+[node name="SpiceLabel" type="Label" parent="PanelContainer/VSplitContainer/VSplitContainer/HSplitContainer"]
+margin_left = 55.0
+margin_right = 146.0
+margin_bottom = 14.0
+text = "Spice:"
+align = 1
+
+[node name="PlayButton" type="Button" parent="PanelContainer/VSplitContainer"]
+margin_top = 52.0
+margin_right = 146.0
+margin_bottom = 72.0
+text = "Play"
+
+[connection signal="pressed" from="PanelContainer/VSplitContainer/PlayButton" to="." method="_on_PlayButton_pressed"]

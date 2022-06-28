@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://player/bullet.gd"
 }, {
-"base": "Area2D",
-"class": "Coin",
-"language": "GDScript",
-"path": "res://coin/coin.gd"
-}, {
 "base": "RigidBody2D",
 "class": "Enemy",
 "language": "GDScript",
@@ -33,28 +28,36 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://player/player.gd"
+}, {
+"base": "Area2D",
+"class": "Sauce",
+"language": "GDScript",
+"path": "res://objects/sauce.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
-"Coin": "",
 "Enemy": "",
 "MovingPlatform": "",
-"Player": ""
+"Player": "",
+"Sauce": ""
 }
 
 [application]
 
-config/name="Physics-Based Platformer 2D"
+config/name="Spicy"
 config/description="This demo uses RigidBody2D for the player and enemies. These
 character controllers are more powerful than KinematicBody2D,
 but can be more difficult to handle, as they require
 manual modification of the RigidBody velocity."
-run/main_scene="res://Stage.tscn"
+run/main_scene="res://screens/Title.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://Global.gd"
 
 [debug]
 
-settings/stdout/print_fps=true
 gdscript/completion/autocomplete_setters_and_getters=true
 gdscript/warnings/unsafe_property_access=true
 gdscript/warnings/unsafe_method_access=true
