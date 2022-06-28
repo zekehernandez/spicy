@@ -56,4 +56,5 @@ func _on_Sauce_body_entered(body):
 
 func _on_Mover_cutsceneOver():
   camera.current = true
+  mover.removeFade()
   mover.startPlaying()

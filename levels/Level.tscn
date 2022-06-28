@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://player/Mover.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/TargetZone.tscn" type="PackedScene" id=2]
@@ -8,6 +8,92 @@
 [ext_resource path="res://levels/Results.tscn" type="PackedScene" id=6]
 [ext_resource path="res://objects/Sauce.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Camera.tscn" type="PackedScene" id=8]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Mover/Camera:offset:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Mover/Camera:offset:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Mover/Camera:zoom:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 3, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Mover/Camera:zoom:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 3, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "zoomOut"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Mover/Camera:offset:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Mover/Camera:offset:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Mover/Camera:zoom:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 3, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Mover/Camera:zoom:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 3, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 1 )
+}
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 5 )
@@ -33,6 +119,10 @@ autoplay = true
 
 [node name="Results" parent="UI" instance=ExtResource( 6 )]
 visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/zoomOut = SubResource( 2 )
 
 [connection signal="body_entered" from="TargetZone" to="." method="_on_TargetZone_body_entered"]
 [connection signal="cutsceneOver" from="Mover" to="." method="_on_Mover_cutsceneOver"]

@@ -30,13 +30,13 @@ tile_data = PoolIntArray( -2490235, 536870929, 0, -2490233, 536870930, 0, -24902
 [node name="Level" parent="." index="1"]
 currentLevel = 1
 
-[node name="TargetPosition" parent="Level" index="7"]
+[node name="TargetPosition" parent="Level" index="8"]
 position = Vector2( 3776, -256 )
 
-[node name="LevelBounds" parent="Level" index="8"]
+[node name="LevelBounds" parent="Level" index="9"]
 position = Vector2( 4800, 640 )
 
-[node name="SaucePosition" parent="Level" index="9"]
+[node name="SaucePosition" parent="Level" index="10"]
 position = Vector2( 2752, 320 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="GroundCollision" index="0"]

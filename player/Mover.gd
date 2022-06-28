@@ -6,7 +6,7 @@ signal cutsceneOver
 const JUMP_VELOCITY = 50
 const STOP_JUMP_FORCE = 10
 const TORQUE = 200
-const LANDING_TIME = 3
+const LANDING_TIME = 2
 
 onready var camera = $CutsceneCamera
 onready var dialog = $CanvasLayer/Dialog
@@ -95,7 +95,6 @@ var currentScene = null
 
 onready var cutscenes = {
   0: [
-    { 'speaker': leftBird, 'expression': 'happy', 'message': null, 'animation': 'panIn'},
     { 'speaker': rightBird, 'expression': 'happy', 'message': 'hello', 'animation': 'zoomTwo'},
     { 'speaker': leftBird, 'expression': 'happy', 'message': 'hi there', 'animation': 'twoToOne'},
    ],
@@ -110,6 +109,8 @@ func playScene():
   if currentScene >= currentCutscene.size():
     currentCutscene = null
     currentScene = null
+    animator.play('fadeOut')
+    yield(get_node('AnimationPlayer'), "animation_finished")
     emit_signal("cutsceneOver")
     return
   
@@ -135,8 +136,11 @@ func playScene():
 
 func showCutscene(level):
   print('showCutscene(%s)' % level)
-  if !cutscenes.has(level):
+  if !cutscenes.has(level) || cutscenes.get(level) == null || Global.shownCutscenes[level]:
+    emit_signal("cutsceneOver")
     return
+    
+  Global.showCutscene(level)
     
   camera.current = true
   
@@ -145,8 +149,13 @@ func showCutscene(level):
   currentScene = 0
   
   print('showCutscene calling playScene')
+  animator.play('panIn')
+  yield(get_node('AnimationPlayer'), "animation_finished")
   playScene()
 
 func _on_Dialog_hide_message():
   print('dialog calling playScene')
   playScene()
+
+func removeFade():
+  $CanvasLayer/ColorRect.hide()
