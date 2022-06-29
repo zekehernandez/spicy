@@ -104,13 +104,18 @@ const NEUTRAL = 'neutral'
 const DEFAULT = 'default'
 const SCARED = 'scared'
 const UNCOMFORTABLE = 'uncomfortable'
+const SURPRISED = 'surprised'
+const STRAIN = 'strain'
+
 const LR = 'oneToTwo'
 const RL = 'twoToOne'
 const LB = 'oneToThree'
 const BL = 'threeToOne'
 const RB = 'twoToThree'
 const BR = 'threeToTwo'
+const ZL = 'zoomOne'
 const ZR = 'zoomTwo'
+const ZB = 'zoomThree'
 
 onready var cutscenes = {
   0: [
@@ -132,7 +137,7 @@ onready var cutscenes = {
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "If we drop any wings on the ground or in the water, they're ruined. So, let's not do that."},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "Also, we only have mild wings with us, but the people prefer spicy wings."},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "So, if you see any hot sauce bottles floating around..."},
-    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: "There are bottles of hot sauce just floating in the water?"},
+    { SPEAKER: leftBird, EXPRESSION: SURPRISED, ANIMATION: RL, MESSAGE: "There are bottles of hot sauce just floating in the water?"},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "..."},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "So, if you see that floating sauce, get that on the wings."},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "Not our wings, the wings that we're delivering, of course. It's not a requirement for delivery, but the people love spicy wings."},
@@ -148,7 +153,21 @@ onready var cutscenes = {
     { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: "Maybe we should only deliver the non-sentient wings?"},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "Good idea, Rookie."},
    ],
-  1: null,
+  1: [
+    { SPEAKER: rightBird, EXPRESSION: HAPPY, ANIMATION: ZR, MESSAGE: 'Alright, Rookie, you completed your first job? What do think? Exhilirating, right?'},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: 'Yeah, but I have so many questions - like, why? Why are we doing this?'},
+    { SPEAKER: leftBird, EXPRESSION: HAPPY, ANIMATION: null, MESSAGE: "Don't get me wrong, I enjoyed it, but there have got to be better ways to deliver wings, right?"},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "Drones are a thing now, you know? Or even a boat would probably work better."},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "Well, I suppose..."},
+    { SPEAKER: leftBird, EXPRESSION: STRAIN, ANIMATION: RL, MESSAGE: "And why are the wings just out? In the open! Could we get a box or..."},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "Now listen here, Rookie! This delivery practice was passed down generation to generation!"},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "From my grandfather to my father, my father to me, and one day I'll pass it down to my son."},
+    { SPEAKER: leftBird, EXPRESSION: HAPPY, ANIMATION: RL, MESSAGE: "Alright, okay. I understand. Let's get to work."},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "One thing though, you know my name isn't actually Rookie, right?"},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "..."},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: "Because that's all you've calling me, and I can't help but noticing you've been using a capital 'R'."},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "I uh... wait you can see that?"},
+  ],
 }
 
 func playScene():
