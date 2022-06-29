@@ -14,6 +14,7 @@ onready var animator = $AnimationPlayer
 
 onready var leftBird = $Motor/LeftBird
 onready var rightBird = $Motor/RightBird
+onready var sentientWing = $SentientWing
 
 var timeLanded = 0
 
@@ -93,10 +94,59 @@ func startPlaying():
 var currentCutscene = null
 var currentScene = null
 
+const SPEAKER = 'speaker'
+const EXPRESSION = 'expression'
+const ANIMATION = 'animation'
+const MESSAGE = 'message'
+
+const HAPPY = 'happy'
+const NEUTRAL = 'neutral'
+const DEFAULT = 'default'
+const SCARED = 'scared'
+const UNCOMFORTABLE = 'uncomfortable'
+const LR = 'oneToTwo'
+const RL = 'twoToOne'
+const LB = 'oneToThree'
+const BL = 'threeToOne'
+const RB = 'twoToThree'
+const BR = 'threeToTwo'
+const ZR = 'zoomTwo'
+
 onready var cutscenes = {
   0: [
-    { 'speaker': rightBird, 'expression': 'happy', 'message': 'hello', 'animation': 'zoomTwo'},
-    { 'speaker': leftBird, 'expression': 'happy', 'message': 'hi there', 'animation': 'twoToOne'},
+    { SPEAKER: rightBird, EXPRESSION: HAPPY, ANIMATION: ZR, MESSAGE: 'Good morning, to you! We\'re glad to have you join us for our first delivery of the day.'},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: 'What exactly is this "thing" we\'re delivering again?'},
+    { SPEAKER: sentientWing, EXPRESSION: HAPPY, ANIMATION: LB, MESSAGE: 'Hiya!'},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: BR, MESSAGE: 'I\'m getting to that, just a minute now, Rookie.'},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "If you look around you can see that there's not much left out here, and not many people. But the people that are here love hot, spicy wings."},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: 'I think "spicy" is redundant there.'},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "I'm going to need you to stop interrupting, Rookie!"},
+    { SPEAKER: leftBird, EXPRESSION: HAPPY, ANIMATION: RL, MESSAGE: "Sorry!"},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "Anyhow, we've got to fly these wings over to the islands these folks live on."},
+    { SPEAKER: sentientWing, EXPRESSION: DEFAULT, ANIMATION: RB, MESSAGE: 'It\'s always been my dream to fly!'},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: BR, MESSAGE: "Yes, yes okay, pipe down now."},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "It's not easy work, making these deliveries. So, consider this a practice run, Rookie."},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: "I'm ready to fly!"},
+    { SPEAKER: sentientWing, EXPRESSION: HAPPY, ANIMATION: LB, MESSAGE: 'Weeeee!'},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: BR, MESSAGE: "A couple more things before we take off..."},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "If we drop any wings on the ground or in the water, they're ruined. So, let's not do that."},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "Also, we only have mild wings with us, but the people prefer spicy wings."},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "So, if you see any hot sauce bottles floating around..."},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: "There are bottles of hot sauce just floating in the water?"},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "..."},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "So, if you see that floating sauce, get that on the wings."},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "Not our wings, the wings that we're delivering, of course. It's not a requirement for delivery, but the people love spicy wings."},
+    { SPEAKER: sentientWing, EXPRESSION: HAPPY, ANIMATION: RB, MESSAGE: "I'm gonna be sooo SPICY!"},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: BR, MESSAGE: "We just need to land safely by that flag to complete the job."},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "Alright, let's get moving. The people are hungry!"},
+    { SPEAKER: leftBird, EXPRESSION: HAPPY, ANIMATION: RL, MESSAGE: "Let's go!"},
+    { SPEAKER: sentientWing, EXPRESSION: HAPPY, ANIMATION: LB, MESSAGE: 'Yeah, let\'s go!'},
+    { SPEAKER: sentientWing, EXPRESSION: DEFAULT, ANIMATION: null, MESSAGE: "Wait..."},
+    { SPEAKER: sentientWing, EXPRESSION: SCARED, ANIMATION: null, MESSAGE: "AM I GOING TO BE EATEN?!"},
+    { SPEAKER: leftBird, EXPRESSION: UNCOMFORTABLE, ANIMATION: BL, MESSAGE: "..."},
+    { SPEAKER: rightBird, EXPRESSION: UNCOMFORTABLE, ANIMATION: LR, MESSAGE: "..."},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: "Maybe we should only deliver the non-sentient wings?"},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "Good idea, Rookie."},
    ],
   1: null,
 }
@@ -111,6 +161,8 @@ func playScene():
     currentScene = null
     animator.play('fadeOut')
     yield(get_node('AnimationPlayer'), "animation_finished")
+    sentientWing.hide();
+    get_tree().call_group("cargo", "show")
     emit_signal("cutsceneOver")
     return
   
@@ -123,7 +175,7 @@ func playScene():
   
   # Pan Camera
   if scene.animation != null:
-    print('animation')
+    print(ANIMATION)
     animator.play(scene.animation)
     yield(get_node('AnimationPlayer'), "animation_finished")
   
@@ -141,6 +193,10 @@ func showCutscene(level):
     return
     
   Global.showCutscene(level)
+  
+  if level == 0:
+    sentientWing.show();
+    get_tree().call_group("cargo", "hide")
     
   camera.current = true
   

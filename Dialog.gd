@@ -30,7 +30,7 @@ func _process(delta):
     if $Panel/Label.text.length() == current_message.length():
       $Panel/Label2.show()
     
-  var skip = Input.is_action_pressed("ui_accept")
+  var skip = Input.is_action_just_pressed("ui_accept")
   
   if skip:
     if textLength == current_message.length():

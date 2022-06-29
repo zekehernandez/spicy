@@ -21,10 +21,11 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="Panel"]
 margin_left = 32.0
-margin_top = 40.0
-margin_right = 72.0
-margin_bottom = 54.0
+margin_top = 24.0
+margin_right = 768.0
+margin_bottom = 89.0
 text = "test"
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -32,9 +33,9 @@ __meta__ = {
 [node name="Label2" type="Label" parent="Panel"]
 visible = false
 margin_left = 624.0
-margin_top = 72.0
+margin_top = 88.0
 margin_right = 786.0
-margin_bottom = 86.0
+margin_bottom = 102.0
 text = "Press enter to continue..."
 __meta__ = {
 "_edit_use_anchors_": false
