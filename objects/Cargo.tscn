@@ -6,6 +6,10 @@
 [sub_resource type="PhysicsMaterial" id=2]
 friction = 0.25
 
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 512, 192 )
+
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
 region = Rect2( 512, 0, 512, 192 )
@@ -14,12 +18,13 @@ region = Rect2( 512, 0, 512, 192 )
 atlas = ExtResource( 1 )
 region = Rect2( 1024, 0, 512, 192 )
 
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 512, 192 )
-
 [sub_resource type="SpriteFrames" id=8]
 animations = [ {
+"frames": [ SubResource( 5 ) ],
+"loop": true,
+"name": "normal",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 6 ) ],
 "loop": true,
 "name": "spicy",
@@ -28,11 +33,6 @@ animations = [ {
 "frames": [ SubResource( 7 ) ],
 "loop": true,
 "name": "spoiled",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 5 ) ],
-"loop": true,
-"name": "normal",
 "speed": 5.0
 } ]
 

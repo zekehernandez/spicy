@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://player/platform.png" type="Texture" id=1]
 [ext_resource path="res://player/Bird.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Dialog.tscn" type="PackedScene" id=6]
 [ext_resource path="res://player/wings.png" type="Texture" id=7]
 [ext_resource path="res://player/SentientWing.gd" type="Script" id=8]
+[ext_resource path="res://fonts/Sattin.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://tiles/tiles.png" type="Texture" id=10]
 
 [sub_resource type="PhysicsMaterial" id=3]
 friction = 0.5
@@ -616,10 +618,6 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 1 )
 }
 
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 7 )
-region = Rect2( 0, 192, 512, 192 )
-
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 7 )
 region = Rect2( 512, 192, 512, 192 )
@@ -628,13 +626,12 @@ region = Rect2( 512, 192, 512, 192 )
 atlas = ExtResource( 7 )
 region = Rect2( 1024, 192, 512, 192 )
 
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 192, 512, 192 )
+
 [sub_resource type="SpriteFrames" id=21]
 animations = [ {
-"frames": [ SubResource( 18 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 19 ) ],
 "loop": true,
 "name": "happy",
@@ -644,9 +641,20 @@ animations = [ {
 "loop": true,
 "name": "scared",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 18 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
 } ]
 
-[node name="Platform" type="RigidBody2D"]
+[sub_resource type="DynamicFont" id=22]
+size = 64
+outline_size = 3
+outline_color = Color( 0.2, 0.2, 0.2, 1 )
+font_data = ExtResource( 9 )
+
+[node name="Platform" type="RigidBody2D" groups=["player"]]
 position = Vector2( -6.51925e-09, 7.62939e-06 )
 rotation = 0.000650161
 mass = 0.5
@@ -759,5 +767,30 @@ position = Vector2( -0.0364151, -56 )
 scale = Vector2( 0.25, 0.25 )
 frames = SubResource( 21 )
 script = ExtResource( 8 )
+
+[node name="Countdown" type="Label" parent="."]
+visible = false
+margin_left = -16.2393
+margin_top = -367.99
+margin_right = 23.7607
+margin_bottom = -295.99
+custom_fonts/font = SubResource( 22 )
+text = "3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar" type="Sprite" parent="."]
+position = Vector2( -91.5123, -27.8379 )
+scale = Vector2( 3.42913, 0.443522 )
+texture = ExtResource( 10 )
+centered = false
+hframes = 12
+vframes = 12
+frame = 13
+region_rect = Rect2( 100, 100, 122, 120 )
+region_filter_clip = true
 
 [connection signal="hide_message" from="CanvasLayer/Dialog" to="." method="_on_Dialog_hide_message"]

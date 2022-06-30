@@ -99,15 +99,16 @@ tracks/3/keys = {
 script = ExtResource( 5 )
 
 [node name="TargetZone" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1344, 128 )
+position = Vector2( 2432, -2624 )
 
 [node name="Mover" parent="." instance=ExtResource( 1 )]
-position = Vector2( 192, 96 )
+position = Vector2( 1280, -2656 )
 
 [node name="Camera" parent="Mover" instance=ExtResource( 8 )]
 max_zoom = 8
 
 [node name="Sauce" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1088, -2752 )
 
 [node name="ParallaxBg" parent="." instance=ExtResource( 4 )]
 

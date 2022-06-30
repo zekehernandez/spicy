@@ -143,4 +143,4 @@ script = ExtResource( 3 )
 [node name="Face" type="AnimatedSprite" parent="."]
 position = Vector2( -3.72528e-09, -32 )
 frames = SubResource( 9 )
-animation = "left_happy"
+animation = "right_happy"

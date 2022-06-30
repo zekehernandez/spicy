@@ -7,17 +7,22 @@ extends Node
 
 var levelState = {
   'EARLYBIRD': { 'wings': 0, 'spice': false },
-  'OUTONAWING': null,
+  'WINGINGIT': null,
   'AVIANBLUES': null,
+  'BIRDBRAIN': null,
 }
 
 var shownCutscenes = [false, false, false, false, false, false, false, false]
+
 
 var currentLevel = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+  # COMMENT THIS OUT PLZ
+  # shownCutscenes = [true, true, true, false, false, false, false, false]
   pass # Replace with function body.
+  
   
 func showCutscene(level):
   shownCutscenes[level] = true

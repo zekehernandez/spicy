@@ -16,7 +16,11 @@ onready var leftBird = $Motor/LeftBird
 onready var rightBird = $Motor/RightBird
 onready var sentientWing = $SentientWing
 
+onready var bar = $Bar
+
 var timeLanded = 0
+
+var fullLength = 0
 
 var state = "initial"
 
@@ -28,7 +32,7 @@ var stopping_jump = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-  pass # Replace with function body.
+  fullLength = bar.scale.x
   
 func start():
   state = "playing"
@@ -46,6 +50,8 @@ func _process(delta):
         emit_signal("landed", wingCount)
     else:
       timeLanded = 0
+      
+    bar.scale.x = (timeLanded / LANDING_TIME) * fullLength
 
 func _integrate_forces(s):
   if state == "playing":
@@ -119,7 +125,7 @@ const ZB = 'zoomThree'
 
 onready var cutscenes = {
   0: [
-    { SPEAKER: rightBird, EXPRESSION: HAPPY, ANIMATION: ZR, MESSAGE: 'Good morning, to you! We\'re glad to have you join us for our first delivery of the day.'},
+    { SPEAKER: rightBird, EXPRESSION: HAPPY, ANIMATION: ZR, MESSAGE: 'Good morning, to you! We\'re glad to have you join us for the first delivery of the day.'},
     { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: 'What exactly is this "thing" we\'re delivering again?'},
     { SPEAKER: sentientWing, EXPRESSION: HAPPY, ANIMATION: LB, MESSAGE: 'Hiya!'},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: BR, MESSAGE: 'I\'m getting to that, just a minute now, Rookie.'},
@@ -136,13 +142,12 @@ onready var cutscenes = {
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: BR, MESSAGE: "A couple more things before we take off..."},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "If we drop any wings on the ground or in the water, they're ruined. So, let's not do that."},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "Also, we only have mild wings with us, but the people prefer spicy wings."},
-    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "So, if you see any hot sauce bottles floating around..."},
-    { SPEAKER: leftBird, EXPRESSION: SURPRISED, ANIMATION: RL, MESSAGE: "There are bottles of hot sauce just floating in the water?"},
-    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "..."},
-    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "So, if you see that floating sauce, get that on the wings."},
-    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "Not our wings, the wings that we're delivering, of course. It's not a requirement for delivery, but the people love spicy wings."},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "So, if you see any hot sauce bottles floating around, try to get that sauce on the wings."},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "It's not a requirement for delivery, but the people love spicy wings."},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: "We have to get sauce on our wings?"},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "Not OUR wings, the ones we're delivering!"},
     { SPEAKER: sentientWing, EXPRESSION: HAPPY, ANIMATION: RB, MESSAGE: "I'm gonna be sooo SPICY!"},
-    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: BR, MESSAGE: "We just need to land safely by that flag to complete the job."},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: BR, MESSAGE: "All we need to do is land SAFELY by that flag to complete the job."},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "Alright, let's get moving. The people are hungry!"},
     { SPEAKER: leftBird, EXPRESSION: HAPPY, ANIMATION: RL, MESSAGE: "Let's go!"},
     { SPEAKER: sentientWing, EXPRESSION: HAPPY, ANIMATION: LB, MESSAGE: 'Yeah, let\'s go!'},
@@ -165,8 +170,9 @@ onready var cutscenes = {
     { SPEAKER: leftBird, EXPRESSION: HAPPY, ANIMATION: RL, MESSAGE: "Alright, okay. I understand. Let's get to work."},
     { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "One thing though, you know my name isn't actually Rookie, right?"},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "..."},
-    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: "Because that's all you've calling me, and I can't help but noticing you've been using a capital 'R'."},
-    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "I uh... wait you can see that?"},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: "Because that's all you've calling me, and I can't help but noticing you've been using a capital 'R' for 'Rookie'."},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "I uh..."},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "...wait you can see that?"},
   ],
 }
 
