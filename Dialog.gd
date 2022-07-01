@@ -17,7 +17,10 @@ var current_message = ''
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-  pass # Replace with function body.
+  $Panel.visible = false
+  $Panel/Label.text = ''
+  $Panel/Label2.hide()
+  current_message = ''
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -40,9 +43,11 @@ func _process(delta):
       emit_signal("hide_message")
     else:
       $Panel/Label.text = current_message
+      $Panel/Label2.show()
 
 func show_message(message):
   current_message = message
+  $Panel/Label2.hide()
   $Panel/Label.text = ''
   $Panel.visible = true
   emit_signal("show_message")

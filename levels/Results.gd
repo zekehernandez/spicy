@@ -7,7 +7,7 @@ var level = -1
 onready var mainLabel = $PanelContainer/CenterContainer/VBoxContainer/MainLabel
 onready var wingCountLabel = $PanelContainer/CenterContainer/VBoxContainer/WingCountLabel
 onready var spiceLevelLabel = $PanelContainer/CenterContainer/VBoxContainer/SpiceLevelLabel
-onready var nextLevelButton = $PanelContainer/CenterContainer/VBoxContainer/HBoxContainer/NextLevel
+onready var nextLevelButton = $PanelContainer/CenterContainer/VBoxContainer/NextLevel
 onready var levelCodeSection = $PanelContainer/CenterContainer/VBoxContainer/LevelCodeSection
 onready var levelCode = $PanelContainer/CenterContainer/VBoxContainer/LevelCodeSection/LevelCode
 

@@ -22,7 +22,7 @@ func _ready():
 
 func update():
   print("update with level %s" % Global.currentLevel)
-  levelLabel.text = "Level %s" % level
+  levelLabel.text = "Level - %s" % level
   var currentLevel = Global.currentLevel
   var levelState = Global.levelState.values()[level]
   if Global.currentLevel < level:

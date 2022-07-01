@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://player/Mover.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/TargetZone.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://objects/Sauce.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Camera.tscn" type="PackedScene" id=8]
 [ext_resource path="res://levels/PauseMenu.tscn" type="PackedScene" id=9]
+[ext_resource path="res://levels/Controls.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -123,6 +124,9 @@ autoplay = true
 visible = false
 
 [node name="PauseMenu" parent="UI" instance=ExtResource( 9 )]
+visible = false
+
+[node name="Controls" parent="UI" instance=ExtResource( 10 )]
 visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

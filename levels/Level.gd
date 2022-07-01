@@ -43,6 +43,9 @@ func _process(delta):
     results.show()
     
 func _unhandled_input(event):
+  if results.visible == true:
+    return
+  
   var tree  = get_tree()
   if event.is_action_pressed('ui_cancel'):
     tree.paused = not tree.paused

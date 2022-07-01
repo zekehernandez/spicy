@@ -1,54 +1,135 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://fonts/Sattin.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://fonts/ReemKufi-VariableFont_wght.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://screens/Title.gd" type="Script" id=2]
+[ext_resource path="res://background/ParallaxBg.tscn" type="PackedScene" id=3]
+[ext_resource path="res://resources/reem.tres" type="DynamicFont" id=4]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Main"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("CanvasLayer/Control/Title:self_modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2 )
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("CanvasLayer/Control/Title:self_modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("CanvasLayer/Control/Label:self_modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Subtitle"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("CanvasLayer/Control/Label:self_modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
 font_data = ExtResource( 1 )
 
+[sub_resource type="CircleShape2D" id=2]
+
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource( 2 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Main = SubResource( 3 )
+anims/RESET = SubResource( 4 )
+anims/Subtitle = SubResource( 5 )
+
+[node name="MainTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="SubtitleTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.172549, 0.247059, 0.360784, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer"]
-margin_left = 237.0
-margin_top = 192.0
-margin_right = 562.0
-margin_bottom = 288.0
-
-[node name="Title" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer"]
-margin_right = 325.0
-margin_bottom = 72.0
+[node name="Title" type="Label" parent="CanvasLayer/Control"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -384.0
+margin_top = 176.0
+margin_right = -43.0
+margin_bottom = 273.0
+custom_colors/font_color = Color( 0.0901961, 0.52549, 0.737255, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "Deliverwing"
-align = 1
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/CenterContainer/VBoxContainer"]
-margin_top = 76.0
-margin_right = 325.0
-margin_bottom = 96.0
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -168.0
+margin_top = 263.0
+margin_right = -49.0
+margin_bottom = 300.0
+custom_colors/font_color = Color( 0.0901961, 0.52549, 0.737255, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "Press Enter"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Button" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/CenterContainer"]
-margin_left = 143.0
-margin_right = 181.0
-margin_bottom = 20.0
-text = "Play"
+[node name="ParallaxBg" parent="." instance=ExtResource( 3 )]
 
-[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/CenterContainer/Button" to="." method="_on_Button_pressed"]
+[node name="Dummy" type="KinematicBody2D" parent="."]
+position = Vector2( 0, -224 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy"]
+shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="Dummy"]
+current = true
+zoom = Vector2( 2, 2 )
+smoothing_enabled = true
+
+[connection signal="timeout" from="MainTimer" to="." method="_on_MainTimer_timeout"]
+[connection signal="timeout" from="SubtitleTimer" to="." method="_on_SubtitleTimer_timeout"]

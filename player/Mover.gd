@@ -16,6 +16,8 @@ onready var leftBird = $Motor/LeftBird
 onready var rightBird = $Motor/RightBird
 onready var sentientWing = $SentientWing
 
+onready var controls = $CanvasLayer/Controls
+
 onready var bar = $Bar
 
 var timeLanded = 0
@@ -33,6 +35,7 @@ var stopping_jump = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
   fullLength = bar.scale.x
+  bar.scale.x = 0
   
 func start():
   state = "playing"
@@ -71,6 +74,7 @@ func _integrate_forces(s):
     
     if up:
       $Motor.apply_central_impulse(Vector2(0, -15))
+      controls.hide()
       
     if up:
       leftBird.fly(lv.y > 100)
@@ -85,6 +89,7 @@ func _integrate_forces(s):
 func success():
   leftBird.success()
   rightBird.success()  
+  
       
 func failed_level():
   state = "failed"
@@ -94,6 +99,7 @@ func failed_level():
 
 func startPlaying():
   state = "playing"
+  controls.show()
   
 
 # Cutscene Stuff
@@ -195,24 +201,19 @@ func playScene():
   currentScene += 1
     
   # Facial expression
-  print('face')
   scene.speaker.express(scene.expression)
   
   # Pan Camera
   if scene.animation != null:
-    print(ANIMATION)
     animator.play(scene.animation)
     yield(get_node('AnimationPlayer'), "animation_finished")
   
   if scene.message != null:
-    print('dialog')
     dialog.show_message(scene.message)
   else:
-    print('playScene calling playScene')
     playScene()
 
 func showCutscene(level):
-  print('showCutscene(%s)' % level)
   if !cutscenes.has(level) || cutscenes.get(level) == null || Global.shownCutscenes[level]:
     emit_signal("cutsceneOver")
     return
@@ -226,10 +227,8 @@ func showCutscene(level):
   camera.current = true
   
   currentCutscene = cutscenes.get(level)
-  print('cutscene length: %s' % currentCutscene.size())
   currentScene = 0
   
-  print('showCutscene calling playScene')
   animator.play('panIn')
   yield(get_node('AnimationPlayer'), "animation_finished")
   playScene()
