@@ -1,6 +1,5 @@
 extends Control
 
-
 # Declare member variables here. Examples:
 # var a = 2
 var level = -1
@@ -22,6 +21,7 @@ onready var levelCode = $PanelContainer/CenterContainer/VBoxContainer/LevelCodeS
 #  pass
 
 func _on_TryAgainButton_pressed():
+  get_tree().paused = false
   get_tree().reload_current_scene()
   
 func setLevel(newLevel):
@@ -44,12 +44,17 @@ func wasIncomplete():
   levelCodeSection.hide()
 
 func _on_LevelSelectButton_pressed():
-  print('whatup')
+  get_tree().paused = false
   get_tree().change_scene("res://screens/LevelSelect.tscn")
 
 func _on_NextLevel_pressed():
+  get_tree().paused = false
   var nextLevel = level + 1
   if nextLevel >= 0:
     get_tree().change_scene("res://levels/Level%s.tscn" % nextLevel)
   else:
     get_tree().change_scene("res://screens/LevelSelect.tscn")
+
+func _on_ResumeButton_pressed():
+  get_tree().paused = false
+  hide()

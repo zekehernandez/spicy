@@ -13,6 +13,7 @@ onready var camera = $Mover/Camera
 onready var sauce = $Sauce
 
 onready var results = $UI/Results
+onready var pauseMenu = $UI/PauseMenu
 
 var didSauceUp = false
 
@@ -40,6 +41,16 @@ func _process(delta):
     mover.failed_level()
     results.wasIncomplete()
     results.show()
+    
+func _unhandled_input(event):
+  var tree  = get_tree()
+  if event.is_action_pressed('ui_cancel'):
+    tree.paused = not tree.paused
+    if tree.paused:
+      pauseMenu.show()
+    else:
+      pauseMenu.hide()
+    tree.set_input_as_handled()
     
 func _on_Mover_landed(wingCount):
   results.setWingCount(wingCount)
