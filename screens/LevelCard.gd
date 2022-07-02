@@ -21,7 +21,6 @@ func _ready():
 #  pass
 
 func update():
-  print("update with level %s" % Global.currentLevel)
   levelLabel.text = "Level - %s" % level
   var currentLevel = Global.currentLevel
   var levelState = Global.levelState.values()[level]

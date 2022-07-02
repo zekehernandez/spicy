@@ -14,6 +14,9 @@ var MESSAGES = {
 # var b = "text"
 
 var current_message = ''
+var current_pitch = 1
+
+onready var sound = $Sound
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,6 +33,8 @@ func _process(delta):
   var textLength = $Panel/Label.text.length()
   if textLength < current_message.length():
     $Panel/Label.text = current_message.substr(0, textLength + 1)
+    sound.pitch_scale = randf() + current_pitch + 1
+    sound.play()
     if $Panel/Label.text.length() == current_message.length():
       $Panel/Label2.show()
     
@@ -45,8 +50,9 @@ func _process(delta):
       $Panel/Label.text = current_message
       $Panel/Label2.show()
 
-func show_message(message):
+func show_message(message, pitch):
   current_message = message
+  current_pitch = pitch
   $Panel/Label2.hide()
   $Panel/Label.text = ''
   $Panel.visible = true

@@ -5,8 +5,8 @@ extends Node2D
 # var a = 2
 # var b = "text"
 
-onready var levelCodeEdit = $CanvasLayer/GridContainer/Panel/LevelCodeEdit
-onready var levelCodeMessage = $CanvasLayer/GridContainer/Panel/LevelCodeMessage
+onready var levelCodeEdit = $CanvasLayer/Control/CenterContainer/GridContainer/Panel/LevelCodeEdit
+onready var levelCodeMessage = $CanvasLayer/Control/CenterContainer/GridContainer/Panel/LevelCodeMessage
 # Called when the node enters the scene tree for the first time.
 func _ready():
   pass # Replace with function body.

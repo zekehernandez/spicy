@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://screens/LevelSelect.gd" type="Script" id=1]
 [ext_resource path="res://screens/LevelCard.tscn" type="PackedScene" id=2]
 [ext_resource path="res://resources/MainTheme.tres" type="Theme" id=3]
 [ext_resource path="res://fonts/ReemKufi-Bold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://audio/main.mp3" type="AudioStream" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 4 )
@@ -21,15 +22,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control"]
+anchor_right = 1.0
+margin_left = -400.0
+margin_right = -400.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Control/CenterContainer"]
+margin_left = 400.0
+margin_right = 400.0
 columns = 8
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="CanvasLayer/GridContainer"]
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/CenterContainer/GridContainer"]
 
-[node name="LevelCodeEdit" type="LineEdit" parent="CanvasLayer/GridContainer/Panel"]
+[node name="LevelCodeEdit" type="LineEdit" parent="CanvasLayer/Control/CenterContainer/GridContainer/Panel"]
 margin_left = 208.0
 margin_top = 48.0
 margin_right = 608.0
@@ -40,7 +58,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelCodeLabel" type="Label" parent="CanvasLayer/GridContainer/Panel"]
+[node name="LevelCodeLabel" type="Label" parent="CanvasLayer/Control/CenterContainer/GridContainer/Panel"]
 margin_left = 112.0
 margin_top = 48.0
 margin_right = 208.0
@@ -54,7 +72,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SubmitButton" type="Button" parent="CanvasLayer/GridContainer/Panel"]
+[node name="SubmitButton" type="Button" parent="CanvasLayer/Control/CenterContainer/GridContainer/Panel"]
 margin_left = 625.0
 margin_top = 43.0
 margin_right = 692.0
@@ -65,16 +83,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelCodeMessage" type="Label" parent="CanvasLayer/GridContainer/Panel"]
+[node name="LevelCodeMessage" type="Label" parent="CanvasLayer/Control/CenterContainer/GridContainer/Panel"]
 margin_left = 208.0
-margin_top = 96.0
+margin_top = 85.0
 margin_right = 319.0
-margin_bottom = 110.0
+margin_bottom = 99.0
+custom_colors/font_color = Color( 0.239216, 0.266667, 0.392157, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GridContainer/Panel"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/CenterContainer/GridContainer/Panel"]
 margin_left = 16.0
 margin_top = 112.0
 margin_right = 160.0
@@ -84,7 +103,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="IntroButton" type="Button" parent="CanvasLayer/GridContainer/Panel/PanelContainer"]
+[node name="IntroButton" type="Button" parent="CanvasLayer/Control/CenterContainer/GridContainer/Panel/PanelContainer"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 136.0
@@ -95,28 +114,42 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Level Card" parent="CanvasLayer/GridContainer/Panel" instance=ExtResource( 2 )]
+[node name="Level Card" parent="CanvasLayer/Control/CenterContainer/GridContainer/Panel" instance=ExtResource( 2 )]
 margin_left = 176.0
 margin_top = 112.0
 margin_right = 176.0
 margin_bottom = 112.0
 level = 1
 
-[node name="Level Card2" parent="CanvasLayer/GridContainer/Panel" instance=ExtResource( 2 )]
+[node name="Level Card2" parent="CanvasLayer/Control/CenterContainer/GridContainer/Panel" instance=ExtResource( 2 )]
 margin_left = 384.0
 margin_top = 112.0
 margin_right = 384.0
 margin_bottom = 112.0
 level = 2
 
-[node name="Level Card3" parent="CanvasLayer/GridContainer/Panel" instance=ExtResource( 2 )]
+[node name="Level Card3" parent="CanvasLayer/Control/CenterContainer/GridContainer/Panel" instance=ExtResource( 2 )]
 margin_left = 592.0
 margin_top = 112.0
 margin_right = 592.0
 margin_bottom = 112.0
 level = 3
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/GridContainer/Panel"]
+[node name="Level Card4" parent="CanvasLayer/Control/CenterContainer/GridContainer/Panel" instance=ExtResource( 2 )]
+margin_left = 16.0
+margin_top = 256.0
+margin_right = 16.0
+margin_bottom = 256.0
+level = 4
+
+[node name="Level Card5" parent="CanvasLayer/Control/CenterContainer/GridContainer/Panel" instance=ExtResource( 2 )]
+margin_left = 224.0
+margin_top = 256.0
+margin_right = 224.0
+margin_bottom = 256.0
+level = 5
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Control/CenterContainer/GridContainer/Panel"]
 visible = false
 margin_left = 32.0
 margin_top = 128.0
@@ -126,5 +159,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="CanvasLayer/GridContainer/Panel/SubmitButton" to="." method="_on_SubmitButton_pressed"]
-[connection signal="pressed" from="CanvasLayer/GridContainer/Panel/PanelContainer/IntroButton" to="." method="_on_IntroButton_pressed"]
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+
+[connection signal="pressed" from="CanvasLayer/Control/CenterContainer/GridContainer/Panel/SubmitButton" to="." method="_on_SubmitButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/CenterContainer/GridContainer/Panel/PanelContainer/IntroButton" to="." method="_on_IntroButton_pressed"]

@@ -10,21 +10,6 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "RigidBody2D",
-"class": "Bullet",
-"language": "GDScript",
-"path": "res://player/bullet.gd"
-}, {
-"base": "RigidBody2D",
-"class": "Enemy",
-"language": "GDScript",
-"path": "res://enemy/enemy.gd"
-}, {
-"base": "Node2D",
-"class": "MovingPlatform",
-"language": "GDScript",
-"path": "res://platform/moving_platform.gd"
-}, {
-"base": "RigidBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://player/player.gd"
@@ -35,20 +20,14 @@ _global_script_classes=[ {
 "path": "res://objects/sauce.gd"
 } ]
 _global_script_class_icons={
-"Bullet": "",
-"Enemy": "",
-"MovingPlatform": "",
 "Player": "",
 "Sauce": ""
 }
 
 [application]
 
-config/name="Spicy"
-config/description="This demo uses RigidBody2D for the player and enemies. These
-character controllers are more powerful than KinematicBody2D,
-but can be more difficult to handle, as they require
-manual modification of the RigidBody velocity."
+config/name="Deliverwing"
+config/description="A game where you are a bird delivering hot wings."
 run/main_scene="res://screens/Title.tscn"
 config/icon="res://icon.png"
 

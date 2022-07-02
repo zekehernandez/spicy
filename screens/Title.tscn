@@ -1,9 +1,102 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://fonts/ReemKufi-VariableFont_wght.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://screens/Title.gd" type="Script" id=2]
 [ext_resource path="res://background/ParallaxBg.tscn" type="PackedScene" id=3]
 [ext_resource path="res://resources/reem.tres" type="DynamicFont" id=4]
+[ext_resource path="res://audio/BeachAudio.tscn" type="PackedScene" id=5]
+[ext_resource path="res://audio/title.mp3" type="AudioStream" id=6]
+[ext_resource path="res://enemy/Seagull.tres" type="SpriteFrames" id=7]
+[ext_resource path="res://resources/MainTheme.tres" type="Theme" id=8]
+[ext_resource path="res://audio/seagull.wav" type="AudioStream" id=9]
+
+[sub_resource type="Animation" id=7]
+resource_name = "End"
+length = 3.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("CanvasLayer2/Backdrop:self_modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 3 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("CanvasLayer2/Backdrop:self_modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 3 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("CanvasLayer2/Backdrop:self_modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 3 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("CanvasLayer2/Backdrop:self_modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 3 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("BeachAudio:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -50, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 3 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Music:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -50, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 3 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Gulls:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -50, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 3 )
+}
+tracks/7/type = "method"
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 3.02 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "end"
+} ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "Main"
@@ -41,6 +134,199 @@ tracks/1/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("CanvasLayer2/CTA:self_modulate:r")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("CanvasLayer2/CTA:self_modulate:g")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("CanvasLayer2/CTA:self_modulate:b")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("CanvasLayer2/CTA:self_modulate:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("CanvasLayer2/Backdrop:self_modulate:r")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("CanvasLayer2/Backdrop:self_modulate:g")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("CanvasLayer2/Backdrop:self_modulate:b")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("CanvasLayer2/Backdrop:self_modulate:a")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("BeachAudio:volume_db")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/11/type = "bezier"
+tracks/11/path = NodePath("Music:volume_db")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/12/type = "bezier"
+tracks/12/path = NodePath("Gulls:volume_db")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Start"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("CanvasLayer2/CTA:self_modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("CanvasLayer2/CTA:self_modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("CanvasLayer2/CTA:self_modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("CanvasLayer2/CTA:self_modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("CanvasLayer2/Backdrop:self_modulate:r")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("CanvasLayer2/Backdrop:self_modulate:g")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("CanvasLayer2/Backdrop:self_modulate:b")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("CanvasLayer2/Backdrop:self_modulate:a")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "Subtitle"
@@ -55,27 +341,61 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 )
 }
 
+[sub_resource type="CircleShape2D" id=2]
+
 [sub_resource type="DynamicFont" id=1]
 size = 64
 font_data = ExtResource( 1 )
-
-[sub_resource type="CircleShape2D" id=2]
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/End = SubResource( 7 )
 anims/Main = SubResource( 3 )
 anims/RESET = SubResource( 4 )
+anims/Start = SubResource( 6 )
 anims/Subtitle = SubResource( 5 )
 
 [node name="MainTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 6.0
 one_shot = true
 
 [node name="SubtitleTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="ParallaxBg" parent="." instance=ExtResource( 3 )]
+
+[node name="Dummy" type="KinematicBody2D" parent="."]
+position = Vector2( 0, -224 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy"]
+shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="Dummy"]
+current = true
+zoom = Vector2( 2, 2 )
+smoothing_enabled = true
+
+[node name="Gull1" type="AnimatedSprite" parent="Dummy" groups=["seagull"]]
+position = Vector2( -1002, 424 )
+scale = Vector2( 0.5, 0.5 )
+frames = ExtResource( 7 )
+frame = 1
+speed_scale = 0.75
+playing = true
+offset = Vector2( 112, -256 )
+flip_h = true
+
+[node name="Gull2" type="AnimatedSprite" parent="Dummy" groups=["seagull"]]
+position = Vector2( -1137, 259 )
+scale = Vector2( 0.5, 0.5 )
+frames = ExtResource( 7 )
+speed_scale = 0.75
+playing = true
+offset = Vector2( 112, -256 )
+flip_h = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -91,9 +411,9 @@ self_modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -384.0
-margin_top = 176.0
+margin_top = 70.0
 margin_right = -43.0
-margin_bottom = 273.0
+margin_bottom = 167.0
 custom_colors/font_color = Color( 0.0901961, 0.52549, 0.737255, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "Deliverwing"
@@ -107,9 +427,9 @@ self_modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -168.0
-margin_top = 263.0
+margin_top = 157.0
 margin_right = -49.0
-margin_bottom = 300.0
+margin_bottom = 194.0
 custom_colors/font_color = Color( 0.0901961, 0.52549, 0.737255, 1 )
 custom_fonts/font = ExtResource( 4 )
 text = "Press Enter"
@@ -118,18 +438,44 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ParallaxBg" parent="." instance=ExtResource( 3 )]
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
-[node name="Dummy" type="KinematicBody2D" parent="."]
-position = Vector2( 0, -224 )
+[node name="Backdrop" type="ColorRect" parent="CanvasLayer2"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.160784, 0.180392, 0.270588, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy"]
-shape = SubResource( 2 )
+[node name="CTA" type="Label" parent="CanvasLayer2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -67.0
+margin_top = -12.5
+margin_right = 67.0
+margin_bottom = 12.5
+theme = ExtResource( 8 )
+custom_colors/font_color = Color( 0.917647, 0.917647, 0.917647, 1 )
+text = "Press Enter to Start"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Camera2D" type="Camera2D" parent="Dummy"]
-current = true
-zoom = Vector2( 2, 2 )
-smoothing_enabled = true
+[node name="BeachAudio" parent="." instance=ExtResource( 5 )]
+volume_db = 0.0
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="Gulls" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+autoplay = true
 
 [connection signal="timeout" from="MainTimer" to="." method="_on_MainTimer_timeout"]
 [connection signal="timeout" from="SubtitleTimer" to="." method="_on_SubtitleTimer_timeout"]

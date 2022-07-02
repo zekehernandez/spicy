@@ -29,6 +29,8 @@ func setLevel(newLevel):
   levelCode.text = Global.levelState.keys()[level]
   if Global.levelState.keys().size() <= level + 1:
     nextLevelButton.hide()
+    levelCodeSection.hide()
+    mainLabel.text = "You Win!"
   
 func setWingCount(wingCount):
   wingCountLabel.text = "Wing Count: %s" % wingCount

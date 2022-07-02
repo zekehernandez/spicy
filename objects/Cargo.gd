@@ -11,10 +11,15 @@ onready var animatedSprite = $AnimatedSprite
 func spoil():
   isSpoiled = true
   animatedSprite.play("spoiled")
+  
 
 func _on_Area2D_body_entered(body):
   spoil()
 
 
 func _on_Area2D_area_entered(area):
+  if area.is_in_group('water'):
+    $Splash.play()
+  else:
+    $Sound.play()
   spoil()

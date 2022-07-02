@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/flapping.mp3-59654efd541a2bebfaa4171bd5632a42.mp3str"
+
+[deps]
+
+source_file="res://audio/flapping.mp3"
+dest_files=[ "res://.import/flapping.mp3-59654efd541a2bebfaa4171bd5632a42.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

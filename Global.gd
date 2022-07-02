@@ -10,10 +10,11 @@ var levelState = {
   'WINGINGIT': null,
   'AVIANBLUES': null,
   'BIRDBRAIN': null,
+  'BIRDSOFAFEATHER': null,
+  'SOUTHFORTHEWINTER': null,
 }
 
 var shownCutscenes = [false, false, false, false, false, false, false, false]
-
 
 var currentLevel = 0
 

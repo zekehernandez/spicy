@@ -1,6 +1,6 @@
 extends Node2D
 
-
+signal start_level
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -14,6 +14,10 @@ onready var sauce = $Sauce
 
 onready var results = $UI/Results
 onready var pauseMenu = $UI/PauseMenu
+
+onready var mainMusic = $MainMusic
+onready var successMusic = $SuccessMusic
+onready var failMusic = $FailMusic
 
 var didSauceUp = false
 
@@ -37,9 +41,11 @@ func _process(delta):
       else:
         unspoiled += 1
 
-  if unspoiled == 0:
+  if unspoiled == 0 and results.visible == false:
     mover.failed_level()
     results.wasIncomplete()
+    mainMusic.stop()
+    failMusic.play()
     results.show()
     
 func _unhandled_input(event):
@@ -57,6 +63,8 @@ func _unhandled_input(event):
     
 func _on_Mover_landed(wingCount):
   results.setWingCount(wingCount)
+  mainMusic.stop()
+  successMusic.play()
   results.show()
   mover.success()
   Global.completeLevel(currentLevel, wingCount, didSauceUp)
@@ -72,3 +80,13 @@ func _on_Mover_cutsceneOver():
   camera.current = true
   mover.removeFade()
   mover.startPlaying()
+  mainMusic.play()
+  emit_signal('start_level')
+
+
+func _on_GroundCollision_body_entered(body):
+  pass # Replace with function body.
+
+func _on_WaterArea_body_entered(body):
+  if !body.is_in_group("level"):
+    $Splash.play()

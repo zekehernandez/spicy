@@ -20,6 +20,9 @@ onready var controls = $CanvasLayer/Controls
 
 onready var bar = $Bar
 
+onready var cutsceneMusic = $CutsceneMusic
+onready var flappingSound = $Motor/Flapping
+
 var timeLanded = 0
 
 var fullLength = 0
@@ -44,7 +47,10 @@ func _process(delta):
   if state == "playing":
     if $LandingDetector.get_overlapping_areas().size() > 0 and abs(linear_velocity.y) < 1:
       timeLanded += delta
+      if !$Charge.playing:
+        $Charge.play()
       if timeLanded >= LANDING_TIME:
+        $Charge.stop()
         state = "landed"
         var wingCount = 0
         for wing in $OnArea.get_overlapping_bodies():
@@ -53,6 +59,7 @@ func _process(delta):
         emit_signal("landed", wingCount)
     else:
       timeLanded = 0
+      $Charge.stop()
       
     bar.scale.x = (timeLanded / LANDING_TIME) * fullLength
 
@@ -75,10 +82,14 @@ func _integrate_forces(s):
     if up:
       $Motor.apply_central_impulse(Vector2(0, -15))
       controls.hide()
+    else:
+      flappingSound.stop()
       
     if up:
       leftBird.fly(lv.y > 100)
       rightBird.fly(lv.y > 100)
+      if !flappingSound.playing:
+        flappingSound.play(1)
     elif lv.y > 0.5:
       leftBird.glide()
       rightBird.glide()
@@ -131,7 +142,7 @@ const ZB = 'zoomThree'
 
 onready var cutscenes = {
   0: [
-    { SPEAKER: rightBird, EXPRESSION: HAPPY, ANIMATION: ZR, MESSAGE: 'Good morning, to you! We\'re glad to have you join us for the first delivery of the day.'},
+    { SPEAKER: rightBird, EXPRESSION: HAPPY, ANIMATION: ZR, MESSAGE: 'Good morning! We\'re glad to have you join us for the first delivery of the day.'},
     { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: 'What exactly is this "thing" we\'re delivering again?'},
     { SPEAKER: sentientWing, EXPRESSION: HAPPY, ANIMATION: LB, MESSAGE: 'Hiya!'},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: BR, MESSAGE: 'I\'m getting to that, just a minute now, Rookie.'},
@@ -142,9 +153,9 @@ onready var cutscenes = {
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "Anyhow, we've got to fly these wings over to the islands these folks live on."},
     { SPEAKER: sentientWing, EXPRESSION: DEFAULT, ANIMATION: RB, MESSAGE: 'It\'s always been my dream to fly!'},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: BR, MESSAGE: "Yes, yes okay, pipe down now."},
-    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "It's not easy work, making these deliveries. So, consider this a practice run, Rookie."},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "It's not easy work making these deliveries. So, consider this a practice run, Rookie."},
     { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: "I'm ready to fly!"},
-    { SPEAKER: sentientWing, EXPRESSION: HAPPY, ANIMATION: LB, MESSAGE: 'Weeeee!'},
+    { SPEAKER: sentientWing, EXPRESSION: HAPPY, ANIMATION: LB, MESSAGE: 'Weeeeeeeeeeeeeeeeeee!'},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: BR, MESSAGE: "A couple more things before we take off..."},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "If we drop any wings on the ground or in the water, they're ruined. So, let's not do that."},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "Also, we only have mild wings with us, but the people prefer spicy wings."},
@@ -165,10 +176,37 @@ onready var cutscenes = {
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "Good idea, Rookie."},
    ],
   1: [
-    { SPEAKER: rightBird, EXPRESSION: HAPPY, ANIMATION: ZR, MESSAGE: 'Alright, Rookie, you completed your first job? What do think? Exhilirating, right?'},
-    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: 'Yeah, but I have so many questions - like, why? Why are we doing this?'},
-    { SPEAKER: leftBird, EXPRESSION: HAPPY, ANIMATION: null, MESSAGE: "Don't get me wrong, I enjoyed it, but there have got to be better ways to deliver wings, right?"},
-    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "Drones are a thing now, you know? Or even a boat would probably work better."},
+    { SPEAKER: rightBird, EXPRESSION: HAPPY, ANIMATION: ZR, MESSAGE: 'Alright, Rookie, you completed your first job. Not bad.'},
+    { SPEAKER: leftBird, EXPRESSION: HAPPY, ANIMATION: RL, MESSAGE: "Yeah, that wasn't so hard I guess."},
+    { SPEAKER: rightBird, EXPRESSION: HAPPY, ANIMATION: LR, MESSAGE: "Don't get too comfortable. You hear that sound?"},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: "Seagulls?"},
+    { SPEAKER: rightBird, EXPRESSION: HAPPY, ANIMATION: LR, MESSAGE: "Seagulls."},
+    { SPEAKER: rightBird, EXPRESSION: HAPPY, ANIMATION: null, MESSAGE: "Those ruthless birds will knock you right out of the sky if you're not careful."},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: "Okay, I'll watch out."},
+  ],
+  2: [
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: ZL, MESSAGE: "So... that's a pretty big whale over there."},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "Yes, whales are large creatures."},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: "..."},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "So, we just have to fly right past that whale, huh?"},
+    { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "Well, yes. That's where we need to deliver the wings."},
+    { SPEAKER: leftBird, EXPRESSION: STRAIN, ANIMATION: RL, MESSAGE: "Okay, fine."},
+  ],
+  3: [
+    { SPEAKER: sentientWing, EXPRESSION: DEFAULT, ANIMATION: ZB, MESSAGE: "Ooooooohhh! A windmill!"},
+    { SPEAKER: rightBird, EXPRESSION: DEFAULT, ANIMATION: BR, MESSAGE: "What are you doing here, little wing?"},
+    { SPEAKER: rightBird, EXPRESSION: DEFAULT, ANIMATION: null, MESSAGE: "Are you coming along?"},
+    { SPEAKER: sentientWing, EXPRESSION: HAPPY, ANIMATION: RB, MESSAGE: "No."},
+    { SPEAKER: sentientWing, EXPRESSION: DEFAULT, ANIMATION: null, MESSAGE: "I still don't want to be eaten."},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: BL, MESSAGE: "Understandable."},
+  ],
+  4: [
+    { SPEAKER: rightBird, EXPRESSION: HAPPY, ANIMATION: ZR, MESSAGE: "Ahhh. It just doesn't get much better than this" },
+    { SPEAKER: leftBird, EXPRESSION: HAPPY, ANIMATION: RL, MESSAGE: "Yeah, it's nice..."},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "..but I have so many questions - like, why?"},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "Why are we doing this?"},
+    { SPEAKER: leftBird, EXPRESSION: HAPPY, ANIMATION: null, MESSAGE: "Don't get me wrong, I've been enjoying our time, but there have got to be better ways to deliver wings, right?"},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "Drones are a thing now you know? Or even a boat would probably work better."},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "Well, I suppose..."},
     { SPEAKER: leftBird, EXPRESSION: STRAIN, ANIMATION: RL, MESSAGE: "And why are the wings just out? In the open! Could we get a box or..."},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "Now listen here, Rookie! This delivery practice was passed down generation to generation!"},
@@ -180,10 +218,17 @@ onready var cutscenes = {
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: LR, MESSAGE: "I uh..."},
     { SPEAKER: rightBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "...wait you can see that?"},
   ],
+  5: [
+    { SPEAKER: rightBird, EXPRESSION: HAPPY, ANIMATION: ZR, MESSAGE: "Alright, rookie. Last delivery of the day." },
+    { SPEAKER: leftBird, EXPRESSION: HAPPY, ANIMATION: RL, MESSAGE: "Oh look, the house is right there!"},
+    { SPEAKER: rightBird, EXPRESSION: HAPPY, ANIMATION: LR, MESSAGE: "But look where the sauce is..." },
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: RL, MESSAGE: "Where is it?"},
+    { SPEAKER: leftBird, EXPRESSION: NEUTRAL, ANIMATION: null, MESSAGE: "Oh, just right down..."},
+    { SPEAKER: leftBird, EXPRESSION: SURPRISED, ANIMATION: null, MESSAGE: "[Bird sounds]"},
+   ]
 }
 
 func playScene():
-  print('playing scene %s' % currentScene)
   if currentCutscene == null:
     return 
   
@@ -191,6 +236,7 @@ func playScene():
     currentCutscene = null
     currentScene = null
     animator.play('fadeOut')
+    cutsceneMusic.stop()
     yield(get_node('AnimationPlayer'), "animation_finished")
     sentientWing.hide();
     get_tree().call_group("cargo", "show")
@@ -209,7 +255,7 @@ func playScene():
     yield(get_node('AnimationPlayer'), "animation_finished")
   
   if scene.message != null:
-    dialog.show_message(scene.message)
+    dialog.show_message(scene.message, scene.speaker.pitch)
   else:
     playScene()
 
@@ -218,9 +264,11 @@ func showCutscene(level):
     emit_signal("cutsceneOver")
     return
     
+  cutsceneMusic.play()
+    
   Global.showCutscene(level)
   
-  if level == 0:
+  if level == 0 or level == 3:
     sentientWing.show();
     get_tree().call_group("cargo", "hide")
     
@@ -234,8 +282,11 @@ func showCutscene(level):
   playScene()
 
 func _on_Dialog_hide_message():
-  print('dialog calling playScene')
   playScene()
 
 func removeFade():
   $CanvasLayer/ColorRect.hide()
+
+func _on_Platform_body_entered(body):
+  if state == "playing" and !body.is_in_group("cargo") and !$Pat.playing:
+    $Pat.play()

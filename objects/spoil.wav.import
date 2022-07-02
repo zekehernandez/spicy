@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/spoil.wav-3a1a8c75b31d9cb5f42f18bec6d68ec9.sample"
+
+[deps]
+
+source_file="res://objects/spoil.wav"
+dest_files=[ "res://.import/spoil.wav-3a1a8c75b31d9cb5f42f18bec6d68ec9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

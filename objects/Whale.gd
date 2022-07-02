@@ -8,13 +8,15 @@ extends Node2D
 onready var animator = $AnimationPlayer
 onready var waitTimer = $WaitTimer
 onready var activeTimer = $ActiveTimer
+onready var waterSound = $WaterSound
 onready var eye = $KinematicBody2D/Body/Eye
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+#func _ready():
+
+func start():
   animator.play("activate")
   activeTimer.start()
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -33,3 +35,7 @@ func _on_ActiveTimer_timeout():
   yield(get_node('AnimationPlayer'), "animation_finished")
   waitTimer.start()
   animator.play("wait")
+
+
+func _on_Level_start_level():
+  start()

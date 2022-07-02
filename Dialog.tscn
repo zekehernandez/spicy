@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Dialog.gd" type="Script" id=1]
 [ext_resource path="res://fonts/LondrinaSolid-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://fonts/LondrinaSolid-Thin.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://resources/borderbox.tres" type="StyleBox" id=4]
+[ext_resource path="res://audio/dialogSound.ogg" type="AudioStream" id=5]
 
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 2 )
@@ -59,3 +60,7 @@ align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+pitch_scale = 2.11

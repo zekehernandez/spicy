@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/thunk.ogg-a3fdba414ad1b73227b7c1737c61d86a.oggstr"
+
+[deps]
+
+source_file="res://audio/thunk.ogg"
+dest_files=[ "res://.import/thunk.ogg-a3fdba414ad1b73227b7c1737c61d86a.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
